@@ -1,50 +1,47 @@
+:root {
+  --primary-color: #000;
+  --secondary-color: #888;
+  --font-family: 'Montserrat', 'Noto Sans JP', 'Roboto Condensed', Arial, sans-serif;
+}
 
-@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Noto+Sans+JP:wght@500&family=Roboto+Condensed:wght@300&display=swap');
-/* Regla de estilo para todo el body */
 body {
   margin: 0;
-  font-family: 'Montserrat', 'Noto Sans JP', 'Roboto Condensed', Arial, sans-serif;
+  font-family: var(--font-family);
   -webkit-font-smooth: antialiased;
   -moz-font-smooth: antialiased;
   font-smooth: antialiased;
-  }
+}
   
-  code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-  }
-  
-  /* Reglas de estilo globales */
-  h1 {
+h1 {
   text-align: center;
-  }
+}
   
-  a {
-  color: #000;
+a {
+  color: var(--primary-color);
   text-decoration: none;
   margin: 5px;
   cursor: pointer;
   transition: color 0.3s ease-in-out;
-  }
+}
   
-  a:hover {
-  color: #888;
-  }
+a:hover {
+  color: var(--secondary-color);
+}
   
-  .contact {
+.contact {
   text-align: center;
   margin: 80px;
-  }
+}
   
-  .favButton {
+.favButton {
   background-color: rgba(136, 136, 136, 0.116);
   padding: 10px;
   border: none;
   width: 100%;
   cursor: pointer;
-  }
+}
   
-  footer {
+footer {
   display: flex;
   justify-content: center;
   text-align: center;
@@ -53,28 +50,28 @@ body {
   bottom: 0;
   height: 40px;
   margin-top: 2rem;
-  }
+}
   
-  footer > img {
+footer > img {
   width: 200px;
   margin: 0;
-  }
+}
   
-  footer > p {
+footer > p {
   margin: 0;
   padding-top: 0.7rem;
-  }
+}
   
-  form {
+form {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   width: 300px;
   height: 100px;
   margin: 0 auto;
-  }
+}
   
-  .card-grid {
+.card-grid {
   display: flex;
   justify-content: space-evenly;
   gap: 1rem;
@@ -82,9 +79,9 @@ body {
   height: auto;
   flex-wrap: wrap;
   margin: 0 auto;
-  }
+}
   
-  table {
+table {
   border-collapse: collapse;
   border-spacing: 0;
   width: 85%;
@@ -92,32 +89,32 @@ body {
   border: 1px solid #ccc;
   margin: 5%;
   height: 20vh;
-  }
+}
   
-  td,
-  th {
+td,
+th {
   border: 1px solid black;
   text-align: center;
   padding: 8px;
-  }
+}
   
-  .tableCategories {
+.tableCategories {
   font-weight: bold;
-  }
+}
   
-  .tableData {
+.tableData {
   font-weight: 300;
-  }
+}
   
-  tr:nth-child(even) {
+tr:nth-child(even) {
   background-color: #dddddd;
-  }
+}
   
-  .dark {
+.dark {
   background-color: #12121296;
   color: white;
-  }
+}
   
-  .dark > a {
+.dark > a {
   color: white;
-  }
+}
