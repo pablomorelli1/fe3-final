@@ -1,77 +1,77 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import { useContext, createContext, useEffect, useState, useReducer } from "react";
 
-const GlobalStates = createContext();
+export const UsersState = createContext();
 
 const themes = {
-  dark: {
-    theme: true,
-  },
-  light: {
-    theme: false,
-  },
+    dark: {
+        theme: false,
+        bgColor: '#949494',
+        color: 'white',
+        fontSize: '3rem',
+        cardColor: '#E2E2E2',
+        navColor: '#12121296'
+    },
+    light: {
+        theme: true,
+        bgColor: 'white',
+        color: 'black',
+        fontSize: '2.5rem',
+        cardColor: 'white',
+        navColor: '#E5E5E5'
+    }
 };
 
-const initialApiState = [];
-const intialThemeState = themes.light;
-const initialFavState = JSON.parse(localStorage.getItem("favs")) || [];
-
-const apiReducer = (state, action) => {
-  switch (action.type) {
-    case "GET_DENTIST":
-      return action.payload;
-    default:
-      throw new Error();
-  }
-};
+const initialThemeState = themes.light;
 
 const themeReducer = (state, action) => {
-  switch (action.type) {
-    case "SWITCH_DARK":
-      return themes.dark;
-    case "SWITCH_LIGHT":
-      return themes.light;
-    default:
-      throw new Error();
-  }
+    switch (action.type) {
+        case 'SWITCH_DARK':
+            return themes.dark;
+        case 'SWITCH_LIGHT':
+            return themes.light;
+        default:
+            throw new Error();
+    }
 };
 
-const favReducer = (state, action) => {
-  switch (action.type) {
-    case "ADD_FAV":
-      return [...state, action.payload];
-    default:
-      throw new Error();
-  }
+const favsReducer = (state, action) => {
+    switch(action.type){
+        case 'ADD_FAV':
+            return [ ...state, action.payload ];
+        case 'REMOVE_FAV':
+            return state.filter(user => user !== action.payload);
+        default:
+            throw new Error();
+    }
 };
 
 const Context = ({ children }) => {
-  const [apiState, apiDispatch] = useReducer(apiReducer, initialApiState);
-  const [themeState, themeDispatch] = useReducer(
-    themeReducer,
-    intialThemeState
-  );
-  const [favState, favDispatch] = useReducer(favReducer, initialFavState);
+    const [users, setUsers] = useState([]); 
+    const url = 'https://jsonplaceholder.typicode.com/users';
+    const [themeState, themeDispatch] = useReducer(themeReducer, initialThemeState);
+    const initialValueFavs = JSON.parse(localStorage.getItem('favs')) || []; 
+    const [favsState, favsDispatch] = useReducer(favsReducer, initialValueFavs); 
 
-  const url = "https://jsonplaceholder.typicode.com/users";
+    useEffect(() => {
+        localStorage.setItem('favs', JSON.stringify(favsState));
+    }, [favsState]); 
 
-  useEffect(() => {
-    localStorage.setItem("favs", JSON.stringify(favState));
-  }, [favState]);
+    useEffect(() => {
+        const fetchUsers = async () => {
+            const res = await fetch(url);
+            const data = await res.json();
+            setUsers(data);
+        };
+        fetchUsers();
+    }, []);
 
-  useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => apiDispatch({ type: "GET_DENTIST", payload: data }));
-  }, []);
-
-  return (
-    <GlobalStates.Provider
-      value={{ apiState, themeState, themeDispatch, favState, favDispatch }}
-    >
-      {children}
-    </GlobalStates.Provider>
-  );
+    return (
+        <UsersState.Provider value={{ users, setUsers, themeState, themeDispatch, favsState, favsDispatch }}>
+            {children}
+        </UsersState.Provider>
+    );
 };
+
 export default Context;
 
-export const useGlobalStates = () => useContext(GlobalStates);
+export const useUsersState = () => useContext(UsersState);

@@ -1,0 +1,37 @@
+footer {
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+}
+
+.footer-content p {
+  margin: 0;
+  color: white;
+  font-size: 1.2rem;
+  margin-right: 1rem;
+}
+
+.footer-content img {
+  background-color: white;
+  max-height: 50px;
+}
+
+.socialMediaIcon {
+  width: 30px;
+  height: 30px;
+  background-color: black;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.socialMediaIcon:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}

@@ -1,19 +1,47 @@
-import React from "react";
-import Form from "../Components/Form.jsx";
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
 
-const Contact = () => {
+const Detail = () => {
+  const [users, setUsers] = useState({});
+  const { id } = useParams();
+  const url = `https://jsonplaceholder.typicode.com/users/${id.replace(':', '')}`;
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        setUsers(data);
+      } catch (error) {
+        console.log('Error fetching user:', error);
+      }
+    };
+    fetchUsers();
+  }, [id, url]);
+
   return (
-    <div>
-      <div className="contact">
-        <h2>¿Quieres saber más?</h2>
-        <p>
-          Envíanos tus preguntas y nos <br></br>
-          pondremos en contacto contigo
-        </p>
-      </div>
-      <Form />
-    </div>
+    <>
+      <h1>Detail Dentist {users.id} </h1>
+      <table>
+        <thead>
+          <tr className='tableCategories'>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Website</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className='tableData'>
+            <td>{users?.name}</td>
+            <td>{users?.email}</td>
+            <td>{users?.phone}</td>
+            <td>{users?.website}</td>
+          </tr>
+        </tbody>
+      </table>
+    </>
   );
 };
 
-export default Contact;
+export default Detail;
