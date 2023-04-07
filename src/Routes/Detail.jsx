@@ -1,19 +1,19 @@
-import React from 'react'
+import React from "react";
+import Form from "../Components/Form.jsx";
 
-
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
-
-const Detail = () => {
- 
-  // Consumiendo el parametro dinamico de la URL deberan hacer un fetch a un user en especifico
-
+const Contact = () => {
   return (
-    <>
-      <h1>Detail Dentist id </h1>
-      {/* aqui deberan renderizar la informacion en detalle de un user en especifico */}
-      {/* Deberan mostrar el name - email - phone - website por cada user en especifico */}
-    </>
-  )
-}
+    <div>
+      <div className="contact">
+        <h2>¿Quieres saber más?</h2>
+        <p>
+          Envíanos tus preguntas y nos <br></br>
+          pondremos en contacto contigo
+        </p>
+      </div>
+      <Form />
+    </div>
+  );
+};
 
-export default Detail
+export default Contact;
