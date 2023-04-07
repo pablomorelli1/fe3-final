@@ -10,8 +10,10 @@ const Card = ({ user }) => {
   const handleFavs = () => {
     if (favsState.includes(user)) {
       favsDispatch({ type: "REMOVE_FAV", payload: user });
+      alert(`${name} se eliminó de tus favoritos`);
     } else {
       favsDispatch({ type: "ADD_FAV", payload: user });
+      alert(`${name} se agregó a tus favoritos`);
     }
   };
 
